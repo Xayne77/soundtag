@@ -16,7 +16,7 @@ function LibraryView({
 }: { library: Song[]; onTagsUpdate: (id: string, tags: string[]) => void; onDelete: (id: string) => void }) {
   const [filterTag, setFilterTag] = useState("all");
   const [search, setSearch] = useState("");
-  const allUsedTags = ["all", ...new Set(library.flatMap(s => s.tags || []))];
+  const allUsedTags = ["all", ...Array.from(new Set(library.flatMap(s => s.tags || [])))];
 
   const filtered = library.filter(s => {
     const matchTag = filterTag === "all" || (s.tags || []).includes(filterTag);
@@ -376,3 +376,4 @@ export default function SoundTagApp() {
     </div>
   );
 }
+
